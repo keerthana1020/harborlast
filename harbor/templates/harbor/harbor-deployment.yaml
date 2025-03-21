@@ -36,5 +36,3 @@ spec:
       - name: data
         persistentVolumeClaim:
           claimName: harbor-pvc
-      - name: ssl
-        emptyDir: {}
