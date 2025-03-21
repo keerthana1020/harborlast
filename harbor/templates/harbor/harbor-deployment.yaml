@@ -27,6 +27,18 @@ spec:
             - name: core-config
               mountPath: /etc/core/app.conf
               subPath: app.conf
+
+        # Add Nginx (proxy) container
+        - name: nginx
+          image: goharbor/nginx-photon:v2.12.2
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+
       volumes:
         - name: harbor-data
           persistentVolumeClaim:
@@ -37,3 +49,6 @@ spec:
         - name: core-config
           configMap:
             name: core-config
+        - name: nginx-config
+          configMap:
+            name: nginx-config
