@@ -27,12 +27,12 @@ data:
       sslmode: disable
     harbor_admin_password: Harbor12345
     data_volume: /mnt/data/harbor
-    redis:
-      host: harbor-redis
-      port: 6379
-      password: redispassword
-      db_index: 1
     cache:
       enabled: true
       expire_hours: 24
       type: redis
+      redis:
+       host: harbor-redis
+       port: 6379
+       password: redispassword
+       db_index: 1
