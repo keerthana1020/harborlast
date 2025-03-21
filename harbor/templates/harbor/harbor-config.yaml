@@ -12,12 +12,19 @@ data:
     session_provider = memory
   harbor.yml: |
     hostname: harbor.local
+    http:
+      port: 80
     https:
       enabled: false
     internal_tls:
       enabled: false
     database:
+      host: harbor-postgresql
+      port: 5432
+      username: postgres
       password: changeMe
+      database: registry
+      sslmode: disable
     harbor_admin_password: Harbor12345
     data_volume: /mnt/data/harbor
     redis:
