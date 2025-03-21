@@ -14,7 +14,9 @@ spec:
     spec:
       containers:
       - name: trivy
-        image: aquasec/trivy:0.12.0
+        image: aquasec/trivy:0.59.0
+        args:
+          - "server"  # <-- Added to run Trivy as a server
         ports:
         - containerPort: 8080
         volumeMounts:
