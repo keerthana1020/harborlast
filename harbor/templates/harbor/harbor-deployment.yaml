@@ -28,8 +28,8 @@ spec:
           subPath: harbor.yml
         - name: data
           mountPath: /mnt/data/harbor
-        - name: ssl
-          mountPath: /etc/harbor/ssl  # Mount SSL certificates
+        - name: tls-certificates
+          mountPath: /etc/harbor/certs
       volumes:
       - name: config
         configMap:
@@ -37,6 +37,11 @@ spec:
       - name: data
         persistentVolumeClaim:
           claimName: harbor-pvc
-      - name: ssl
+      - name: tls-certificates
         secret:
-          secretName: harbor-ssl-secret  # Ensure this secret exists with the SSL certs
+          secretName: harbor-ssl-secret
+          items:
+          - key: tls.crt
+            path: harbor.crt
+          - key: tls.key
+            path: harbor.key
