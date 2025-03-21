@@ -18,6 +18,7 @@ spec:
         image: goharbor/harbor-core:v2.12.2
         ports:
         - containerPort: 8080
+        - containerPort: 443  # Add the port for HTTPS
         volumeMounts:
         - name: config
           mountPath: /conf/app.conf
@@ -28,7 +29,7 @@ spec:
         - name: data
           mountPath: /mnt/data/harbor
         - name: ssl
-          mountPath: /etc/harbor/ssl
+          mountPath: /etc/harbor/ssl  # Mount SSL certificates
       volumes:
       - name: config
         configMap:
@@ -37,4 +38,5 @@ spec:
         persistentVolumeClaim:
           claimName: harbor-pvc
       - name: ssl
-        emptyDir: {}
+        secret:
+          secretName: harbor-ssl-secret  # Ensure this secret exists with the SSL certs
