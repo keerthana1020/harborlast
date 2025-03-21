@@ -41,7 +41,7 @@ spec:
         secret:
           secretName: harbor-ssl-secret
           items:
-          - key: tls.crt
+          - key: harbor.crt
             path: harbor.crt
-          - key: tls.key
+          - key: harbor.key
             path: harbor.key
