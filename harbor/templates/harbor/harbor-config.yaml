@@ -10,12 +10,16 @@ data:
     enablegzip = true
     [session]
     session_provider = memory
+
   harbor.yml: |
     hostname: harbor.local
     http:
       port: 80
     https:
-      enabled: false
+      enabled: true  # Enable HTTPS
+      port: 443      # Default HTTPS port
+      certificate: /etc/harbor/ssl/harbor.crt  # Path to the SSL certificate
+      private_key: /etc/harbor/ssl/harbor.key  # Path to the SSL private key
     internal_tls:
       enabled: false
     database:
@@ -27,12 +31,14 @@ data:
       sslmode: disable
     harbor_admin_password: Harbor12345
     data_volume: /mnt/data/harbor
+
+    # Cache settings
     cache:
       enabled: true
       expire_hours: 24
       type: redis
       redis:
-       host: harbor-redis
-       port: 6379
-       password: redispassword
-       db_index: 1
+        host: harbor-redis
+        port: 6379
+        password: redispassword
+        db_index: 1
