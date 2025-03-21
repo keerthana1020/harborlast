@@ -32,10 +32,11 @@ data:
     harbor_admin_password: Harbor12345
     data_volume: /mnt/data/harbor
     redis:
+      host: harbor-redis
+      port: 6379
       password: redispassword
-    trivy:
-      skip_update: false
-      vulnerability_types:
-        - os
-        - library
-      ignore_unfixed: false
+      db_index: 1
+    cache:
+      enabled: true
+      expire_hours: 24
+      type: redis
