@@ -6,8 +6,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 8080                # Expose port 8080 to external users
-      targetPort: 8080          # Map to the container's port 8080
+    - port: 80                   # Expose external port 80
+      targetPort: 80             # Map to container's port 80
       protocol: TCP
       name: http
   selector:
