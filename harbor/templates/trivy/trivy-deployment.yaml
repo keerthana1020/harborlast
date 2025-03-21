@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trivy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trivy
+  template:
+    metadata:
+      labels:
+        app: trivy
+    spec:
+      containers:
+      - name: trivy
+        image: aquasec/trivy:0.12.0
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: trivy-cache
+          mountPath: /root/.cache
+      volumes:
+      - name: trivy-cache
+        persistentVolumeClaim:
+          claimName: trivy-pvc

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jobservice
+  template:
+    metadata:
+      labels:
+        app: jobservice
+    spec:
+      containers:
+      - name: jobservice
+        image: goharbor/harbor-jobservice:v2.12.2
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: jobservice-data
+          mountPath: /var/lib/jobservice
+      volumes:
+      - name: jobservice-data
+        persistentVolumeClaim:
+          claimName: jobservice-pvc

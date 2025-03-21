@@ -1,0 +1,6 @@
+harbor:
+  expose:
+    type: loadBalancer
+  persistence:
+    enabled: true
+    resourcePolicy: retain
