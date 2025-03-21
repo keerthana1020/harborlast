@@ -18,9 +18,9 @@ spec:
         ports:
         - containerPort: 5000
         volumeMounts:
-        - name: registry-data
-          mountPath: /storage
+        - name: registry-config
+          mountPath: /etc/registry
       volumes:
-      - name: registry-data
-        persistentVolumeClaim:
-          claimName: registry-pvc
+      - name: registry-config
+        configMap:
+          name: registry-config
