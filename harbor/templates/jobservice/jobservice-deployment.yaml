@@ -19,7 +19,7 @@ spec:
         - containerPort: 8080
         volumeMounts:
         - name: jobservice-data
-          mountPath: /var/lib/jobservice
+          mountPath: /mnt/data/jobservice
       volumes:
       - name: jobservice-data
         persistentVolumeClaim:
