@@ -28,7 +28,7 @@ spec:
           mountPath: /etc/registry/passwd
           subPath: config.yml
         - name: harbor-config
-          mountPath: /etc/harbor/harbor.yml
+          mountPath: /mnt/data/harbor
           subPath: harbor.yml
       volumes:
       - name: harbor-data
