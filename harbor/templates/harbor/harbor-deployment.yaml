@@ -23,10 +23,12 @@ spec:
           mountPath: /etc/app.conf
           subPath: app.conf
         - name: config
-          mountPath: /etc/core/harbor.yml
+          mountPath: /etc/harbor/harbor.yml
           subPath: harbor.yml
         - name: data
           mountPath: /mnt/data/harbor
+        - name: ssl
+          mountPath: /etc/harbor/ssl
       volumes:
       - name: config
         configMap:
@@ -34,9 +36,5 @@ spec:
       - name: data
         persistentVolumeClaim:
           claimName: harbor-pvc
-           volumeMounts:
-        - name: ssl
-          mountPath: /etc/harbor/ssl
-      volumes:
       - name: ssl
         emptyDir: {}
