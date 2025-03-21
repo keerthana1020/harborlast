@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jobservice
+  namespace: harborlast
 spec:
   replicas: 1
   selector:
@@ -20,7 +21,13 @@ spec:
         volumeMounts:
         - name: jobservice-data
           mountPath: /mnt/data/jobservice
+        - name: config
+          mountPath: /etc/jobservice/config
+          subPath: harbor.yml
       volumes:
       - name: jobservice-data
         persistentVolumeClaim:
           claimName: jobservice-pvc
+      - name: config
+        configMap:
+          name: harbor-config
