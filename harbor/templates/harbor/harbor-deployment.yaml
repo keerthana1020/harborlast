@@ -27,7 +27,7 @@ spec:
         - name: core-config
           mountPath: /etc/core/app.conf
           subPath: app.conf
-      volumes:
+     volumes:
       - name: harbor-data
         persistentVolumeClaim:
           claimName: harbor-pvc
