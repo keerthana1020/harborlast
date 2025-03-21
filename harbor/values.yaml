@@ -1,6 +1,37 @@
 harbor:
   expose:
     type: loadBalancer
+    tls:
+      enabled: false  # Set to true if using HTTPS with TLS certificates
+    ports:
+      http:
+        port: 80
+      https:
+        port: 443
+    clusterIP: ""  # Optional, use if you want a static ClusterIP
   persistence:
     enabled: true
-    resourcePolicy: retain
+    resourcePolicy: retain  # Retains data even after uninstalling
+    persistentVolumeClaim:
+      registry:
+        existingClaim: harbor-pvc
+      jobservice:
+        existingClaim: harbor-jobservice-pvc
+      database:
+        existingClaim: harbor-postgres-pvc
+      redis:
+        existingClaim: harbor-redis-pvc
+      trivy:
+        existingClaim: harbor-trivy-pvc
+  database:
+    type: internal  # Using internal PostgreSQL (or set external for an external DB)
+    internal:
+      password: changeMe
+  cache:
+    enabled: true
+    expire_hours: 24
+    type: redis
+  redis:
+    host: harbor-redis
+    port: 6379
+    password: redispassword
