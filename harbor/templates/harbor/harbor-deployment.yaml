@@ -34,3 +34,9 @@ spec:
       - name: data
         persistentVolumeClaim:
           claimName: harbor-pvc
+           volumeMounts:
+        - name: ssl
+          mountPath: /etc/harbor/ssl
+      volumes:
+      - name: ssl
+        emptyDir: {}
