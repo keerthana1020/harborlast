@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: portal
+  namespace: harborlast
 spec:
   replicas: 1
   selector:
@@ -13,11 +14,14 @@ spec:
         app: portal
     spec:
       containers:
-      - name: portal
-        image: goharbor/harbor-portal:v2.12.2
-        ports:
-        - containerPort: 80
+        - name: portal
+          image: goharbor/harbor-portal:v2.12.2
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: portal-data
+              mountPath: /usr/share/nginx/html
       volumes:
-      - name: portal-data
-        persistentVolumeClaim:
-          claimName: portal-pvc
+        - name: portal-data
+          persistentVolumeClaim:
+            claimName: portal-pvc
