@@ -1,0 +1,25 @@
+# registry-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: registry-config
+  namespace: harborlast
+data:
+  config.yml: |
+    version: 0.1
+    log:
+      fields:
+        service: registry
+    storage:
+      filesystem:
+        rootdirectory: /storage
+    http:
+      addr: :5000
+      secret: asecretforlocaldevelopment
+      headers:
+        X-Content-Type-Options: [nosniff]
+    health:
+      storagedriver:
+        enabled: true
+        interval: 10s
+        threshold: 3
