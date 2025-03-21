@@ -18,7 +18,7 @@ spec:
         image: goharbor/harbor-core:v2.12.2
         ports:
         - containerPort: 8080
-      volumeMounts:
+        volumeMounts:
         - name: config
           mountPath: /conf/app.conf
           subPath: app.conf
