@@ -27,8 +27,6 @@ spec:
           subPath: harbor.yml
         - name: data
           mountPath: /mnt/data/harbor
-        - name: ssl
-          mountPath: /etc/harbor/ssl
       volumes:
       - name: config
         configMap:
@@ -36,5 +34,3 @@ spec:
       - name: data
         persistentVolumeClaim:
           claimName: harbor-pvc
-      - name: ssl
-        emptyDir: {}
