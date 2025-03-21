@@ -20,6 +20,13 @@ spec:
         volumeMounts:
         - name: pg-data
           mountPath: /var/lib/postgresql/data
+        env:
+        - name: POSTGRES_USER
+          value: "harbor"   # Default username for Harbor
+        - name: POSTGRES_PASSWORD
+          value: "HarborPass123"   # Set a strong password here
+        - name: POSTGRES_DB
+          value: "registry"   # Database name for Harbor registry
       volumes:
       - name: pg-data
         persistentVolumeClaim:
