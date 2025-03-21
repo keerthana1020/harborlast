@@ -19,15 +19,18 @@ spec:
         ports:
         - containerPort: 8080
         volumeMounts:
-        - name: jobservice-data
-          mountPath: /mnt/data/jobservice
         - name: config
-          mountPath: /etc/jobservice/config
+          mountPath: /etc/app.conf
+          subPath: app.conf
+        - name: config
+          mountPath: /etc/jobservice/harbor.yml
           subPath: harbor.yml
+        - name: data
+          mountPath: /mnt/data/jobservice
       volumes:
-      - name: jobservice-data
-        persistentVolumeClaim:
-          claimName: jobservice-pvc
       - name: config
         configMap:
           name: harbor-config
+      - name: data
+        persistentVolumeClaim:
+          claimName: jobservice-pvc
