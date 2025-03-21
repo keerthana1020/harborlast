@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: portal-pv
+  namespace: harborlast
 spec:
   capacity:
     storage: 5Gi
