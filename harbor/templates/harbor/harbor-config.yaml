@@ -10,22 +10,11 @@ data:
     enablegzip = true
     [session]
     session_provider = memory
-  config.yml: |
-    version: 2.12.2
-    log:
-      level: info
-      fields:
-        service: registry
-    storage:
-      filesystem:
-        rootdirectory: /mnt/data/harbor/registry
-    auth:
-      htpasswd:
-        realm: harbor-registry-basic
-        path: /etc/registry/passwd
   harbor.yml: |
     hostname: harbor.local
     https:
+      enabled: false
+    internal_tls:
       enabled: false
     database:
       password: changeMe
