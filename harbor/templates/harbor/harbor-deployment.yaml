@@ -25,7 +25,7 @@ spec:
           mountPath: /etc/core/app.conf
           subPath: app.conf
         - name: harbor-config
-          mountPath: /etc/registry/config.yml
+          mountPath: /etc/registry/passwd
           subPath: config.yml
         - name: harbor-config
           mountPath: /etc/harbor/harbor.yml
