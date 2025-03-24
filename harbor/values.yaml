@@ -35,3 +35,10 @@ harbor:
     host: harbor-redis
     port: 6379
     password: redispassword
+    secret:
+  name: harbor-ssl-secret
+  crt: |-
+    {{ .Files.Get "certs/harbor.crt" | b64enc | quote }}
+  key: |-
+    {{ .Files.Get "certs/harbor.key" | b64enc | quote }}
+
