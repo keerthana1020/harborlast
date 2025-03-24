@@ -2,7 +2,8 @@ harbor:
   expose:
     type: loadBalancer
     tls:
-      enabled: false  # Set to true if using HTTPS with TLS certificates
+      enabled: true  # Enable TLS if using HTTPS with certificates
+      secretName: harbor-ssl-secret
     ports:
       http:
         port: 80
@@ -35,10 +36,9 @@ harbor:
     host: harbor-redis
     port: 6379
     password: redispassword
-    secret:
-  name: harbor-ssl-secret
-  crt: |-
-    {{ .Files.Get "certs/harbor.crt" | b64enc | quote }}
-  key: |-
-    {{ .Files.Get "certs/harbor.key" | b64enc | quote }}
-
+  secret:
+    name: harbor-ssl-secret
+    crt: |-
+      {{ .Files.Get "certs/harbor.crt" | b64enc | quote }}
+    key: |-
+      {{ .Files.Get "certs/harbor.key" | b64enc | quote }}
