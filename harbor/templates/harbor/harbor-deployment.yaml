@@ -41,7 +41,7 @@ spec:
           mountPath: /etc/harbor/harbor.yml
           subPath: harbor.yml
         - name: data
-          mountPath: /data
+          mountPath: /mnt/data/harbor
       volumes:
       - name: config
         configMap:
