@@ -29,7 +29,7 @@ spec:
         - name: data
           mountPath: /mnt/data/harbor
         - name: tls-certificates
-          mountPath: /etc/harbor/harbor-ssl-secret.yml
+          mountPath: /etc/templates/harbor/harbor-ssl-secret.yml
       volumes:
       - name: config
         configMap:
