@@ -9,7 +9,8 @@ data:
     runmode = prod
     enablegzip = true
     [session]
-    session_provider = memory
+    session_provider = redis
+    session_provider_config = redis://:redispassword@harbor-redis:6379/0
 
   harbor.yml: |
     hostname: harbor.local
@@ -18,8 +19,8 @@ data:
     https:
       enabled: true           # Enable HTTPS
       port: 443               # Default HTTPS port
-      certificate: /etc/harbor/certs/harbor-cert-secret.yaml  # Path to the SSL certificate
-      private_key: /etc/harbor/certs/harbor-cert-secret.yaml  # Path to the SSL private key
+      certificate: /etc/harbor/certs/harbor  # Correct certificate path
+      private_key: /etc/harbor/certs/harbor.key  # Correct private key path
     internal_tls:
       enabled: false
     database:
@@ -34,11 +35,5 @@ data:
 
     # Cache settings
     cache:
-      enabled: true
-      expire_hours: 24
-      type: redis
-      redis:
-        host: harbor-redis
-        port: 6379
-        password: redispassword
-        db_index: 1
+      type: "redis"
+      redis_url: "redis://:redispassword@harbor-redis:6379/1"
