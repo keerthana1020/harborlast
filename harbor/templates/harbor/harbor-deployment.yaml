@@ -1,37 +1,54 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: harbor
+  name: harbor-core
   namespace: harborlast
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: harbor
+      app: harbor-core
   template:
     metadata:
       labels:
-        app: harbor
+        app: harbor-core
     spec:
       containers:
-      - name: harbor
+      - name: harbor-core
         image: goharbor/harbor-core:v2.12.2
         ports:
-        - containerPort: 8080
-        - containerPort: 443  # Add the port for HTTPS
+        - containerPort: 8080  # HTTP port
+        - containerPort: 8443  # HTTPS port (Harbor-core uses 8443, not 443)
+        env:
+        - name: CORE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: harbor-secrets
+              key: CORE_SECRET
+        - name: JOBSERVICE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: harbor-secrets
+              key: JOBSERVICE_SECRET
         volumeMounts:
         - name: config
-          mountPath: /etc/templates/harbor/app.conf
+          mountPath: /etc/harbor/core/app.conf
           subPath: app.conf
         - name: config
-          mountPath: /etc/templates/harbor/harbor.yml
+          mountPath: /etc/harbor/core/config.yml
+          subPath: config.yml
+        - name: harbor-config
+          mountPath: /etc/harbor/harbor.yml
           subPath: harbor.yml
         - name: data
-          mountPath: /mnt/data/harbor
+          mountPath: /data
         - name: tls-certificates
-          mountPath: /etc/templates/harbor/harbor-ssl-secret.yml
+          mountPath: /etc/harbor/ssl
       volumes:
       - name: config
+        configMap:
+          name: harbor-core-config
+      - name: harbor-config
         configMap:
           name: harbor-config
       - name: data
@@ -39,9 +56,5 @@ spec:
           claimName: harbor-pvc
       - name: tls-certificates
         secret:
-          secretName: harbor-ssl-secret
-          items:
-          - key: harbor.crt
-            path: harbor.crt
-          - key: harbor.key
-            path: harbor.key
+          secretName: harbor-tls
+          optional: true
