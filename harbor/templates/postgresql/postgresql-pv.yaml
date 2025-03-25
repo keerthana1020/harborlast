@@ -14,4 +14,3 @@ spec:
   storageClassName: gp2
   hostPath:
     path: /mnt/data/postgresql
-    type: DirectoryOrCreate
