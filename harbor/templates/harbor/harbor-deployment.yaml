@@ -21,10 +21,10 @@ spec:
         - containerPort: 443  # Add the port for HTTPS
         volumeMounts:
         - name: config
-          mountPath: /conf/app.conf
+          mountPath: /etc/templates/harbor/app.conf
           subPath: app.conf
         - name: config
-          mountPath: /etc/harbor/harbor.yml
+          mountPath: /etc/templates/harbor/harbor.yml
           subPath: harbor.yml
         - name: data
           mountPath: /mnt/data/harbor
