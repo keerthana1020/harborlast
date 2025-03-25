@@ -42,8 +42,6 @@ spec:
           subPath: harbor.yml
         - name: data
           mountPath: /data
-        - name: tls-certificates
-          mountPath: /etc/harbor/ssl
       volumes:
       - name: config
         configMap:
