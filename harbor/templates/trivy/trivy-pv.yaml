@@ -4,7 +4,7 @@ metadata:
   name: trivy-pv
 spec:
   capacity:
-    storage: 50Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
   storageClassName: gp2
