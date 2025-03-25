@@ -4,7 +4,7 @@ metadata:
   name: redis-pv
 spec:
   capacity:
-    storage: 50Gi
+    storage: 2Gi
   accessModes:
     - ReadWriteOnce
   storageClassName: gp2
