@@ -2,17 +2,15 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: portal-pv
-  namespace: harborlast
   labels:
     app: portal
 spec:
   capacity:
-    storage: 10Gi  # Set the required size
+    storage: 10Gi  # Correct size
   accessModes:
     - ReadWriteOnce
-  storageClassName: gp2-csi  # Updated to gp2-csi
+  storageClassName: gp2-csi  # Correct storage class
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: /mnt/data/portal  # Local path for storing portal data
-  
-
+    path: /mnt/data/portal  # Local path for portal data
+    type: DirectoryOrCreate  # Ensures directory is created if missing
