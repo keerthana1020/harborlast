@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: portal-pvc
+  namespace: harborlast
+  labels:
+    app: portal
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi  # Match PV size
+  storageClassName: gp2-csi  # Updated to gp2-csi
+  volumeName: portal-pv
