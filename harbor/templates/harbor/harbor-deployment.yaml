@@ -18,7 +18,9 @@ spec:
           image: goharbor/harbor-core:v2.12.2
           ports:
             - containerPort: 8080  # HTTP port
+              protocol: TCP
             - containerPort: 8443  # HTTPS port for internal Harbor communication
+              protocol: TCP
           env:
             - name: CORE_SECRET
               valueFrom:
@@ -31,10 +33,10 @@ spec:
                   name: harbor-secrets
                   key: JOBSERVICE_SECRET
           volumeMounts:
-            - name: config
+            - name: core-config
               mountPath: /etc/harbor/core/app.conf
               subPath: app.conf
-            - name: config
+            - name: core-config
               mountPath: /etc/harbor/core/config.yml
               subPath: config.yml
             - name: harbor-config
@@ -46,12 +48,12 @@ spec:
               mountPath: /etc/harbor/certs
               readOnly: true
       volumes:
-        - name: config
+        - name: core-config
           configMap:
             name: harbor-core-config
         - name: harbor-config
           configMap:
-            name: harbor-core-config
+            name: harbor-config
         - name: data
           persistentVolumeClaim:
             claimName: harbor-pvc
