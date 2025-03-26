@@ -8,6 +8,6 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 10Gi  # Match PV size
   storageClassName: gp2-csi  # Ensure correct storage class
   volumeMode: Filesystem
