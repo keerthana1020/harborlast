@@ -7,7 +7,7 @@ metadata:
     app: portal
 spec:
   capacity:
-    storage: 5Gi  # Set the required size
+    storage: 10Gi  # Set the required size
   accessModes:
     - ReadWriteOnce
   storageClassName: gp2-csi  # Updated to gp2-csi
