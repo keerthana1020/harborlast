@@ -3,10 +3,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: portal-pvc
   namespace: harborlast
-  labels:
-    app: portal
-  finalizers:
-    - kubernetes.io/pvc-protection  # <-- Correctly placed under metadata
 spec:
   accessModes:
     - ReadWriteOnce
