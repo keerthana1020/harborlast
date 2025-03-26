@@ -10,6 +10,6 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi  # Match PV size
+      storage: 10Gi  # Match PV size
   storageClassName: gp2-csi  # Updated to gp2-csi
   volumeName: portal-pv
