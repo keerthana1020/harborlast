@@ -10,6 +10,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi  # Match PV size
-  storageClassName: gp2-csi  # Updated to gp2-csi
-  volumeName: portal-pv
+      storage: 10Gi  # Increase size as needed
+  storageClassName: gp2-csi  # Correct for dynamic provisioning
