@@ -14,19 +14,19 @@ spec:
         app: portal
     spec:
       securityContext:
-        fsGroup: 1000  # Set to allow correct file access
+        fsGroup: 1000  # Ensures proper access to mounted volumes
       containers:
         - name: portal
           image: goharbor/harbor-portal:v2.12.2
           ports:
             - containerPort: 8080
           securityContext:
-            runAsUser: 1000  # Non-root for security (optional)
+            runAsUser: 1000  # Non-root for security
             runAsGroup: 1000
             allowPrivilegeEscalation: false
           volumeMounts:
             - name: portal-data
-              mountPath: /mnt/data/portal
+              mountPath: /usr/share/nginx/html  # Correct mountPath for portal
       volumes:
         - name: portal-data
           persistentVolumeClaim:
