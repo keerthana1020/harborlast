@@ -10,5 +10,6 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: "10Gi"  # Corrected to string format
-  storageClassName: gp2-csi  # Corrected for dynamic provisioning
+      storage: 10Gi
+  storageClassName: gp2-csi  # Ensure correct storage class
+  volumeMode: Filesystem
