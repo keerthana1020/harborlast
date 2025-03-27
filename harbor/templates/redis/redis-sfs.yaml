@@ -23,7 +23,7 @@ spec:
             - containerPort: 6379
           volumeMounts:
             - name: redis-data
-              mountPath: /data
+              mountPath: /mnt/data/redis
           env:
             - name: REDIS_PASSWORD
               value: "harborRedis2025!"  # Optional: Set Redis password for security
