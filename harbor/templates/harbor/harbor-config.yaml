@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: harbor-core-config  # Corrected name to match expected ConfigMap
+  name: harbor-core-config
   namespace: harborlast
 data:
   app.conf: |
@@ -17,10 +17,10 @@ data:
     http:
       port: 80
     https:
-      enabled: true           # Enable HTTPS
-      port: 443               # Default HTTPS port
-      certificate: /etc/harbor/harbor-ssl-secret.yaml  # Corrected certificate path
-      private_key: /etc/harbor/harbor-ssl-secret.yaml  # Corrected private key path
+      enabled: true
+      port: 443
+      certificate: /etc/harbor/certs/tls.crt
+      private_key: /etc/harbor/certs/tls.key
     internal_tls:
       enabled: false
     database:
@@ -31,7 +31,7 @@ data:
       database: registry
       sslmode: disable
     harbor_admin_password: Harbor12345
-    data_volume: /mnt/data/postgresql
+    data_volume: /mnt/data/harbor
     # Cache settings
     cache:
       type: "redis"
