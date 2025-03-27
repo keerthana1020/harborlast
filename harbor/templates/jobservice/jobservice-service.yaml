@@ -6,7 +6,7 @@ metadata:
   labels:
     app: jobservice
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - name: jobservice
       port: 8080
