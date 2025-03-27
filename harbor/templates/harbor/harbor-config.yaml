@@ -11,7 +11,14 @@ data:
     [session]
     session_provider = redis
     session_provider_config = redis://:redispassword@harbor-redis:6379/0
-
+---
+# Additional ConfigMap for harbor.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: harbor-config
+  namespace: harborlast
+data:
   harbor.yml: |
     hostname: harbor.local
     http:
