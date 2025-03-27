@@ -31,8 +31,7 @@ data:
       database: registry
       sslmode: disable
     harbor_admin_password: Harbor12345
-    data_volume: /mnt/data/harbor
-
+    data_volume: /mnt/data/postgresql
     # Cache settings
     cache:
       type: "redis"
