@@ -4,10 +4,10 @@ metadata:
   name: portal-pv
   namespace: harborlast
 spec:
-  storageClassName: gp2-csi
   capacity:
     storage: 20Gi
   accessModes:
     - ReadWriteOnce
+  storageClassName: gp2-csi
   hostPath:
-    path: /data/portal
+    path: /mnt/data/harbor-portal
