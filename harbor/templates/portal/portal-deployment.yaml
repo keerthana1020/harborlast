@@ -23,7 +23,7 @@ spec:
           securityContext:
             runAsUser: 10000  # Corrected user
             runAsGroup: 10000
-            allowPrivilegeEscalation: true
+            allowPrivilegeEscalation: false
           livenessProbe:
             httpGet:
               path: /
