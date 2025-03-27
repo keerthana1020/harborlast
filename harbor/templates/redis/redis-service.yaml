@@ -6,7 +6,7 @@ metadata:
   labels:
     app: redis
 spec:
-  type:   # ClusterIP for internal access only
+  type: LoadBalancer  # ClusterIP for internal access only
   ports:
     - name: redis
       port: 6379
