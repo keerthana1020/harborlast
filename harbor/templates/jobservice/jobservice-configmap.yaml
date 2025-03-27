@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jobservice-config
+  namespace: harborlast
+  labels:
+    app: jobservice
+data:
+  app.conf: |
+    # Configuration for Jobservice
+    worker_pool:
+      workers: 10  # Number of workers to run jobs in parallel
+      backend: redis
+    logger:
+      level: info  # Log level (info, debug, warning, error)
+      local:
+        base_dir: /var/log/jobs
+        rotate_size: 200  # Max size (MB) before log rotation
+        archive_days: 7  # Number of days to keep rotated logs
+    metric:
+      enabled: true
+      path: /metrics
+      port: 8081
+    redis_pool:
+      redis_url: redis://:password@redis:6379/1
+      pool_max_idle: 10
+      pool_max_active: 50
+      pool_idle_timeout: 60
+    job_loggers:
+      - file
+    periodic_job:
+      enable: true
+      redis_namespace: harbor_jobservice_namespace
+  harbor.yml: |
+    # Harbor Configuration
+    database:
+      host: postgresql.harborlast.svc.cluster.local
+      port: 5432
+      username: postgres
+      password: password
+      database: registry
+    redis_url: redis://:password@redis:6379/1
+    jobservice_secret: "secret"
