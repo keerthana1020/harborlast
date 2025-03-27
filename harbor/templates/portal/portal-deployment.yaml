@@ -14,19 +14,31 @@ spec:
         app: portal
     spec:
       securityContext:
-        fsGroup: 1000  # Ensures proper access to mounted volumes
+        fsGroup: 10000  # Ensures proper access to mounted volumes
       containers:
         - name: portal
           image: goharbor/harbor-portal:v2.12.2
           ports:
             - containerPort: 8080
           securityContext:
-            runAsUser: 1000  # Non-root for security
-            runAsGroup: 1000
+            runAsUser: 10000  # Corrected user
+            runAsGroup: 10000
             allowPrivilegeEscalation: false
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
           volumeMounts:
             - name: portal-data
-              mountPath: /mnt/data/portal   # Correct mountPath for portal
+              mountPath: /mnt/data/portal  # Correct mountPath for portal
       volumes:
         - name: portal-data
           persistentVolumeClaim:
