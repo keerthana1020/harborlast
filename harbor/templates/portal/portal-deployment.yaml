@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: portal
+  name: harbor-portal
   namespace: harborlast
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: portal
+      app: harbor-portal
   template:
     metadata:
       labels:
-        app: portal
+        app: harbor-portal
     spec:
       securityContext:
         fsGroup: 10000
@@ -20,31 +20,31 @@ spec:
           image: goharbor/harbor-portal:v2.12.2
           ports:
             - containerPort: 8080
+              protocol: TCP
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            allowPrivilegeEscalation: true
+            runAsUser: 10000
+            runAsGroup: 10000
+            allowPrivilegeEscalation: false
           livenessProbe:
             httpGet:
               path: /index.html
               port: 8080
-            initialDelaySeconds: 5
+            initialDelaySeconds: 30
             periodSeconds: 10
+            timeoutSeconds: 5
           readinessProbe:
             httpGet:
               path: /index.html
               port: 8080
             initialDelaySeconds: 5
-            periodSeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
           volumeMounts:
             - name: portal-data
-              mountPath: /data/portal
+              mountPath: /usr/share/nginx/html
             - name: config
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
-            - name: config
-              mountPath: /usr/share/nginx/html/index.html
-              subPath: index.html
       volumes:
         - name: portal-data
           persistentVolumeClaim:
@@ -52,3 +52,6 @@ spec:
         - name: config
           configMap:
             name: portal-config
+            items:
+              - key: nginx.conf
+                path: nginx.conf
