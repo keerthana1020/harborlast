@@ -30,7 +30,7 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: harbor-config
+          name: harbor-core-config
       - name: data
         persistentVolumeClaim:
           claimName: jobservice-pvc
