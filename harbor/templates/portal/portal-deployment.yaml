@@ -26,13 +26,13 @@ spec:
             allowPrivilegeEscalation: false
           livenessProbe:
             httpGet:
-              path: /
+              path: /index.html
               port: 8080
             initialDelaySeconds: 5
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /
+              path: /index.html
               port: 8080
             initialDelaySeconds: 5
             periodSeconds: 10
