@@ -1,16 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: portal
+  name: harbor-portal
   namespace: harborlast
-  labels:
-    app: portal
 spec:
-  type: LoadBalancer  # Keep LoadBalancer for external access
+  type: ClusterIP
   ports:
     - name: http
       port: 8080
       targetPort: 8080
-      protocol: TCP
   selector:
-    app: portal
+    app: harbor-portal
