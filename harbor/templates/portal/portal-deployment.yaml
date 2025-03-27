@@ -23,7 +23,7 @@ spec:
           securityContext:
             runAsUser: 10000  # Corrected user
             runAsGroup: 10000
-            allowPrivilegeEscalation: false
+            allowPrivilegeEscalation: true
           livenessProbe:
             httpGet:
               path: /
@@ -38,7 +38,7 @@ spec:
             periodSeconds: 10
           volumeMounts:
             - name: portal-data
-              mountPath: /mnt/data/portal  # Corrected mountPath for portal
+              mountPath: /data/portal  # Corrected mountPath for portal
       volumes:
         - name: portal-data
           persistentVolumeClaim:
