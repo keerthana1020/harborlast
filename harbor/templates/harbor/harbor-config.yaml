@@ -19,8 +19,8 @@ data:
     https:
       enabled: true           # Enable HTTPS
       port: 443               # Default HTTPS port
-      certificate: /etc/harbor/ssl/tls.crt  # Corrected certificate path
-      private_key: /etc/harbor/ssl/tls.key  # Corrected private key path
+      certificate: /etc/harbor/harbor-ssl-secret.yaml  # Corrected certificate path
+      private_key: /etc/harbor/harbor-ssl-secret.yaml  # Corrected private key path
     internal_tls:
       enabled: false
     database:
